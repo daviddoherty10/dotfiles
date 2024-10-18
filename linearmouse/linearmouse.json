@@ -1,0 +1,26 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.9.5",
+  "schemes" : [
+    {
+      "pointer" : {
+        "acceleration" : 0,
+        "speed" : 0.5
+      },
+      "if" : {
+        "device" : {
+          "productID" : "0x7b",
+          "productName" : "Razer Viper Ultimate Dongle",
+          "vendorID" : "0x1532",
+          "category" : "mouse"
+        }
+      },
+      "scrolling" : {
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "acceleration" : 0,
+        "speed" : 35
+      }
+    }
+  ]
+}
