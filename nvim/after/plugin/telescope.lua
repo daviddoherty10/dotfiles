@@ -1,7 +1,7 @@
 local builtin = require('telescope.builtin')
 local telescope = require('telescope')
 
---Configure Telescope with file_ignore_patterns and improved vimgrep_arguments
+-- Configure Telescope with file_ignore_patterns and improved vimgrep_arguments
 telescope.setup {
     defaults = {
         file_ignore_patterns = {
@@ -17,14 +17,6 @@ telescope.setup {
             "--column",
             "--smart-case",
             "--glob", "!.git/*", -- Ignore .git folder
-            "--glob", "!*.o",    -- Ignore binary patterns
-            "--glob", "!*.out",
-            "--glob", "!*.exe",
-            "--glob", "!*.class",
-            "--glob", "!*.dll",
-            "--glob", "!*.so",
-            "--glob", "!*.bin",
-            "--glob", "!*.obj"
         },
         previewer = true,
         file_previewer = require 'telescope.previewers'.vim_buffer_cat.new,
@@ -37,9 +29,6 @@ telescope.setup {
             hijack_netrw = true,
         },
     },
-    extensions_list = {
-        "file_browser",
-    }
 }
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
