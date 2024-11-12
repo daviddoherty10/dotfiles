@@ -5,10 +5,10 @@ vim.api.nvim_set_keymap('i', 'jk', '<Esc>', { noremap = true })
 --Error jumping
 
 -- Map <leader>e to jump to the next error
-vim.keymap.set('n', 'e', ':cnext<CR>', { noremap = true, silent = true })
-
--- Map <leader>E to jump to the previous error
-vim.keymap.set('n', 'E', ':cprev<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- Map <leader>q to open the quickfix list
 vim.keymap.set('n', '<leader>q', ':copen<CR>', { noremap = true, silent = true })
@@ -24,9 +24,6 @@ vim.o.updatetime = 250 -- Adjust this delay if needed
 
 -- Show diagnostics on cursor hover after updatetime delay
 vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })]]
-
-
-
 
 
 
