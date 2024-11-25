@@ -10,8 +10,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export PATH="$HOME/bin:$PATH"
-
+export PATH="/opt/homebrew/bin:$HOME/bin:$PATH"
 
 
 # Set name of the theme to load --- if set to "random", it will
@@ -104,13 +103,13 @@ source $ZSH/oh-my-zsh.sh
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# For a full list of active aliases, run alias.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# To customize prompt, run p10k configure or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -123,4 +122,3 @@ tmux_sessionizer() {
 # Create the keybinding for Control-F
 zle -N tmux_sessionizer
 bindkey '^F' tmux_sessionizer
-
