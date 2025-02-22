@@ -29,6 +29,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+vim.opt.guicursor = "i:block-blinkwait0-blinkoff50-blinkon50"
 
 vim.opt.termguicolors = true
 

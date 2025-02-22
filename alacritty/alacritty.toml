@@ -8,9 +8,13 @@ padding.y = 10
 decorations = "Buttonless"
 
 opacity = 0.8
-blur = true
+blur = true 
 
 [font]
 normal.family = "MesloLGS Nerd Font Mono"
 
 size = 18
+
+[cursor]
+blink_interval = 300  # Adjust the blinking speed (milliseconds)
+unfocused_hollow = true  # Optional: makes cursor hollow when unfocused
