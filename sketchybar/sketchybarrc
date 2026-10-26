@@ -59,7 +59,7 @@ sketchybar --add item calendar right \
 source "$ITEM_DIR/cpu.sh"
 # Optional lightweight system stat: available RAM (updated every 30 seconds).
 sketchybar --add item memory right \
-  --set memory icon="RAM" update_freq=30 script="$PLUGIN_DIR/memory.sh"
+  --set memory icon="RAM" update_freq=30 script="sh $PLUGIN_DIR/memory.sh"
 # All widgets use the right section; the centre remains empty.
 
 # Initialize widget labels and focused workspace.
