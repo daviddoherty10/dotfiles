@@ -25,9 +25,9 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-# A single fixed workspace badge at the far right; update its text on focus.
+# A single fixed workspace badge at the far left; update its text on focus.
 sketchybar --add event aerospace_workspace_change
-sketchybar --add item workspace.current right \
+sketchybar --add item workspace.current left \
   --set workspace.current \
     icon.drawing=off \
     label="—" \
@@ -55,7 +55,7 @@ sketchybar --add item calendar right \
 source "$ITEM_DIR/cpu.sh"
 # Optional lightweight system stat: available RAM (updated every 30 seconds).
 sketchybar --add item memory right \
-  --set memory icon="RAM" update_freq=30 label="—" script="$PLUGIN_DIR/cpu.sh"
+  --set memory icon="RAM" update_freq=30 label="—" script="sh $PLUGIN_DIR/memory.sh"
 # All widgets use the right section; the centre remains empty.
 
 # Initialize widget labels and focused workspace.
