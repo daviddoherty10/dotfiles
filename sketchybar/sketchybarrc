@@ -26,9 +26,10 @@ default=(
 sketchybar --default "${default[@]}"
 
 # AeroSpace already sends this event from aerospace.toml.
+# Show only occupied workspaces on the focused monitor to avoid overflowing into the notch.
 sketchybar --add event aerospace_workspace_change
 if command -v aerospace >/dev/null 2>&1; then
-  for sid in $(aerospace list-workspaces --all); do
+  for sid in $(aerospace list-workspaces --monitor focused --empty no); do
     sketchybar --add item "workspace.$sid" left \
       --set "workspace.$sid" \
         label="$sid" \
@@ -42,8 +43,8 @@ if command -v aerospace >/dev/null 2>&1; then
   done
 fi
 
-sketchybar --add item front_app q \
-  --set front_app icon.drawing=off label.max_chars=24 script="$PLUGIN_DIR/front_app.sh" \
+sketchybar --add item front_app left \
+  --set front_app icon.drawing=off label.max_chars=18 script="$PLUGIN_DIR/front_app.sh" \
   --subscribe front_app front_app_switched
 
 sketchybar --add item calendar right \
@@ -56,8 +57,10 @@ sketchybar --add item calendar right \
   --subscribe battery system_woke power_source_change
 
 source "$ITEM_DIR/cpu.sh"
-# Place CPU beside the notch on the right rather than in the centre.
-sketchybar --set cpu position=e
+# Optional lightweight system stat: available RAM (updated every 30 seconds).
+sketchybar --add item memory right \
+  --set memory icon="RAM" update_freq=30 script="sh $PLUGIN_DIR/memory.sh"
+# All widgets use the right section; the centre remains empty.
 
 # Initialize widget labels and focused workspace.
 sketchybar --update
