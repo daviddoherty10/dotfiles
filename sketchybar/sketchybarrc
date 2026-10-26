@@ -4,8 +4,9 @@ source "$CONFIG_DIR/colors.sh"
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
 
-# Catppuccin Mocha: compact bar that matches Alacritty and tmux.
-sketchybar --bar position=top height=36 blur_radius=0 color="$BAR_COLOR"
+# Catppuccin Mocha: restore the original 40 px bar height for window alignment.
+# Reserve the notch area on MacBook displays, leaving content on either side.
+sketchybar --bar position=top height=40 notch_display_height=40 notch_width=220 blur_radius=0 color="$BAR_COLOR"
 
 default=(
   padding_left=5
@@ -41,8 +42,8 @@ if command -v aerospace >/dev/null 2>&1; then
   done
 fi
 
-sketchybar --add item front_app left \
-  --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+sketchybar --add item front_app q \
+  --set front_app icon.drawing=off label.max_chars=24 script="$PLUGIN_DIR/front_app.sh" \
   --subscribe front_app front_app_switched
 
 sketchybar --add item calendar right \
@@ -55,6 +56,8 @@ sketchybar --add item calendar right \
   --subscribe battery system_woke power_source_change
 
 source "$ITEM_DIR/cpu.sh"
+# Place CPU beside the notch on the right rather than in the centre.
+sketchybar --set cpu position=e
 
 # Initialize widget labels and focused workspace.
 sketchybar --update
