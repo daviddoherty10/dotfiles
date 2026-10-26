@@ -1,3 +1,14 @@
 int.vim
 plugin/packer_compiled.lua
 linearmouse/
+
+# Zsh generated files
+zsh/.zsh_history
+zsh/.zcompdump*
+zsh/.zsh_sessions/
+
+# tmux downloaded plugins
+tmux/plugins/
+
+# macOS generated files
+.DS_Store
