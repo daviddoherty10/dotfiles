@@ -10,4 +10,8 @@ case "$total_bytes:$page_size:$available_pages" in
   *[!0-9:]*|:*|*::*|*:0:*|0:*|*:) sketchybar --set "$NAME" label="N/A"; exit 0 ;;
 esac
 percent="$(/usr/bin/awk -v pages="$available_pages" -v size="$page_size" -v total="$total_bytes" 'BEGIN { if (total <= 0) exit 1; p = 100 * pages * size / total; if (p > 100) p = 100; if (p < 0) p = 0; printf "%.0f", p }')"
-sketchybar --set "$NAME" label="${percent:-N/A}%"
+if [ -n "$percent" ]; then
+  sketchybar --set "$NAME" label="$percent%"
+else
+  sketchybar --set "$NAME" label="N/A"
+fi
