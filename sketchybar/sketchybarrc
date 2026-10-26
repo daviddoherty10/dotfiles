@@ -25,26 +25,22 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-# AeroSpace already sends this event from aerospace.toml.
-# Show only occupied workspaces on the focused monitor to avoid overflowing into the notch.
+# A single fixed workspace badge at the far right; update its text on focus.
 sketchybar --add event aerospace_workspace_change
-if command -v aerospace >/dev/null 2>&1; then
-  for sid in $(aerospace list-workspaces --monitor focused --empty no); do
-    sketchybar --add item "workspace.$sid" left \
-      --set "workspace.$sid" \
-        label="$sid" \
-        icon.drawing=off \
-        background.color="$ACCENT_COLOR" \
-        label.color="$BAR_COLOR" \
-        background.drawing=off \
-        click_script="aerospace workspace $sid" \
-        script="$PLUGIN_DIR/aerospace.sh $sid" \
-      --subscribe "workspace.$sid" aerospace_workspace_change
-  done
-fi
+sketchybar --add item workspace.current right \
+  --set workspace.current \
+    icon.drawing=off \
+    label="—" \
+    background.color="$ACCENT_COLOR" \
+    label.color="$BAR_COLOR" \
+    script="$PLUGIN_DIR/aerospace.sh" \
+  --subscribe workspace.current aerospace_workspace_change
 
+# Keep the current application close to the left screen edge.
 sketchybar --add item front_app left \
-  --set front_app icon.drawing=off label.max_chars=18 script="$PLUGIN_DIR/front_app.sh" \
+  --set front_app icon.drawing=off label.max_chars=18 \
+    padding_left=3 padding_right=4 \
+    script="$PLUGIN_DIR/front_app.sh" \
   --subscribe front_app front_app_switched
 
 sketchybar --add item calendar right \
@@ -59,7 +55,7 @@ sketchybar --add item calendar right \
 source "$ITEM_DIR/cpu.sh"
 # Optional lightweight system stat: available RAM (updated every 30 seconds).
 sketchybar --add item memory right \
-  --set memory icon="RAM" update_freq=30 script="sh $PLUGIN_DIR/memory.sh"
+  --set memory icon="RAM" update_freq=30 label="—" script="$PLUGIN_DIR/cpu.sh"
 # All widgets use the right section; the centre remains empty.
 
 # Initialize widget labels and focused workspace.
