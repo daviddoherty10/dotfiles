@@ -16,7 +16,8 @@ normal = { family = "MesloLGS Nerd Font Mono", style = "Regular" }
 size = 18.0
 
 [cursor]
-style = { shape = "Block", blinking = "Off" }
+style = { shape = "Block", blinking = "On" }
+blink_interval=350
 unfocused_hollow = true
 
 [mouse]
