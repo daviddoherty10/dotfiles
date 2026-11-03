@@ -169,6 +169,29 @@ Useful additions: `<leader>fg` live grep, `<leader>fb` buffers, `<leader>dk/dj` 
 list navigation, `<leader>dq` workspace diagnostics, and `<leader>lf` formatting.
 `:FormatToggle` turns format-on-save off/on for the session.
 
+## Python environments
+
+Jedi supplies Python completion, hover, definitions and syntax diagnostics. Its
+diagnostics do not check undefined variables or type mismatches; those need a
+separate linter or type checker. Black/isort are formatters and do not add those checks.
+
+The analysis interpreter is selected when Jedi starts: an activated `VIRTUAL_ENV`,
+then the project's `.venv` or `venv`, then `CONDA_PREFIX`, then Python on PATH.
+This keeps project imports separate from the private virtual environment Mason
+uses to run the language server. Standalone Python files also work without Git or
+a `pyproject.toml`. Restart Neovim after changing or creating an environment.
+
+If Python support appears inactive, open the affected `.py` file and check:
+
+```vim
+:LspInfo
+:checkhealth config
+```
+
+The health report shows the Jedi executable, analysis interpreter and active clients.
+If the server is missing, run `:MasonInstall jedi-language-server`, wait for installation,
+then restart Neovim. Check `:MasonLog` for installation failures and `:LspLog` for crashes.
+
 ## Layout and future AI tools
 
 | File/directory | Purpose |
@@ -180,6 +203,7 @@ list navigation, `<leader>dq` workspace diagnostics, and `<leader>lf` formatting
 | `lua/config/lazy.lua` | Plugin manager bootstrap |
 | `lua/config/tools.lua` | Language servers, formatters, parser lists |
 | `lua/config/lsp.lua` | Native server settings and LSP mappings |
+| `lua/config/python.lua` | Python project roots and analysis interpreter selection |
 | `lua/plugins/*.lua` | One area of functionality per plugin module |
 | `lua/plugins/ai.lua` | Empty extension point for future AI integrations |
 | `lazy-lock.json` | Reproducible plugin revisions |
@@ -215,6 +239,7 @@ Run the included headless checks from the config directory after installing plug
 nvim --headless --cmd 'let g:auto_install_tools = v:false' '+luafile tests/smoke.lua'
 nvim --headless --cmd 'let g:auto_install_tools = v:false' '+luafile tests/lsp.lua'
 nvim --headless --cmd 'let g:auto_install_tools = v:false' '+luafile tests/treesitter.lua'
+nvim --headless --cmd 'let g:auto_install_tools = v:false' '+luafile tests/python.lua'
 ```
 
 The smoke check loads every plugin, exercises the preserved keymaps, and checks that
