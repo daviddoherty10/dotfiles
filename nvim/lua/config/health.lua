@@ -8,6 +8,38 @@ function M.check()
             vim.health.error(tool .. " missing; see README.md installation requirements")
         end
     end
+    vim.health.start("Python language server")
+    -- Health can also run before any code buffer has loaded the Mason plugin.
+    pcall(require, "mason")
+    if vim.fn.executable("jedi-language-server") == 1 then
+        vim.health.ok("jedi-language-server: " .. vim.fn.exepath("jedi-language-server"))
+    else
+        vim.health.error(
+            "jedi-language-server is missing; run :MasonInstall jedi-language-server and check :MasonLog"
+        )
+    end
+    local bufnr = vim.fn.bufnr("#")
+    if bufnr < 1 or vim.bo[bufnr].filetype ~= "python" then
+        bufnr = vim.api.nvim_get_current_buf()
+    end
+    local python = require("config.python")
+    local interpreter = python.interpreter(python.root(bufnr))
+    if interpreter then
+        vim.health.ok("Analysis interpreter: " .. interpreter)
+    end
+    local clients = vim.lsp.get_clients({ name = "jedi_language_server" })
+    if #clients == 0 then
+        vim.health.warn("Jedi is not attached; open a Python file and inspect :LspInfo / :MasonLog")
+    else
+        for _, client in ipairs(clients) do
+            vim.health.ok("Jedi attached: " .. (client.root_dir or "standalone file"))
+        end
+    end
+    vim.health.info(
+        "Jedi reports syntax errors; undefined names and type errors require a linter/type checker."
+    )
+
+    vim.health.start("Java runtime")
     local java = vim.env.JDTLS_JAVA_HOME and (vim.env.JDTLS_JAVA_HOME .. "/bin/java") or "java"
     local found, process = pcall(vim.system, { java, "-version" }, { text = true })
     if not found then

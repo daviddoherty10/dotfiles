@@ -32,6 +32,12 @@ function M.setup()
         end,
     })
     vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
+    vim.lsp.config("jedi_language_server", {
+        root_dir = function(bufnr, on_dir)
+            on_dir(require("config.python").root(bufnr))
+        end,
+        before_init = require("config.python").before_init,
+    })
     vim.lsp.config("lua_ls", {
         settings = {
             Lua = {
