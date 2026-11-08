@@ -4,7 +4,7 @@ This repository keeps the existing AeroSpace, tmux, and Neovim keybindings intac
 
 ## Wallpaper
 
-Selected: [Catppuccin Mocha desktop wallpaper](https://github.com/mukhlisakbr/catppuccin-wallpaper/blob/main/desktop/catppuccin-mocha.png), 2560×1600, from [mukhlisakbr/catppuccin-wallpaper](https://github.com/mukhlisakbr/catppuccin-wallpaper).
+Selected: [Great Wave Off Kanagawa — Catppuccin Mocha](https://github.com/teowelton/Wallpapers/blob/main/catppuccin/mocha/Great_Wave_Off_Kanagawa-Catppuccin_Mocha.png), 3840×2160 (4K), from [teowelton/Wallpapers](https://github.com/teowelton/Wallpapers). The wallpaper is a Catppuccin Mocha recolouring of the Great Wave artwork.
 
 To download it to `~/Pictures/Wallpapers` and set it as the desktop background:
 
@@ -12,7 +12,7 @@ To download it to `~/Pictures/Wallpapers` and set it as the desktop background:
 bash ~/.config/scripts/set-mocha-wallpaper.sh
 ```
 
-The script is **opt-in**: cloning the repo does not change your wallpaper. macOS may request permission for System Events to change the background. Requires `curl`. Image comes from the upstream wallpaper project, not this repository.
+The script is **opt-in**: cloning the repo does not change your wallpaper. macOS may request permission for System Events to change the background. Requires `curl`. Image comes from the upstream wallpaper project, not this repository. This image is approximately 40 MB; downloading it requires an internet connection. The script saves it as `~/Pictures/Wallpapers/great-wave-catppuccin-mocha.png`.
 
 ## Font
 
