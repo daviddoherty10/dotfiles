@@ -4,7 +4,7 @@ set -euo pipefail
 
 WALLPAPER_DIR="${HOME}/Pictures/Wallpapers"
 WALLPAPER_PATH="${WALLPAPER_DIR}/great-wave-catppuccin-mocha.png"
-WALLPAPER_URL="https://raw.githubusercontent.com/mukhlisakbr/catppuccin-wallpaper/main/desktop/catppuccin-mocha.png"
+WALLPAPER_URL="https://raw.githubusercontent.com/teowelton/Wallpapers/main/catppuccin/mocha/Great_Wave_Off_Kanagawa-Catppuccin_Mocha.png"
 
 if [[ "$(uname -s)" != "Darwin" ]]; then
   printf 'This wallpaper installer is for macOS only.\n' >&2
